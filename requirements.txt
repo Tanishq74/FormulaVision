@@ -1,0 +1,28 @@
+# --- Core ---
+pandas
+numpy
+sqlalchemy
+psycopg2-binary
+
+# --- API & Backend ---
+fastapi
+uvicorn
+
+# --- ETL / Data Tools ---
+requests
+python-dotenv
+
+# --- Frontend / Dashboards ---
+streamlit
+plotly
+
+# --- ML & Visualization ---
+scikit-learn
+matplotlib
+
+# --- Kafka ---
+confluent-kafka
+
+# --- Dev Tools ---
+pytest
+black

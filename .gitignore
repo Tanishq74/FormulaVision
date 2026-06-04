@@ -1,0 +1,29 @@
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Virtual Environments
+venv/
+.venv/
+env/
+
+# FastF1 data cache folders
+f1_cache/
+.fastf1_cache/
+
+# Environment configurations and credentials
+.env
+.env.local
+.env.*.local
+claude key.txt
+*.key
+
+# Output plots and images
+*.png
+*.jpg
+
+# OS-specific files
+.DS_Store
+Thumbs.db
