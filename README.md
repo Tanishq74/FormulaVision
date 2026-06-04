@@ -1,64 +1,92 @@
-# 2025_f1_predictions
+# FormulaVision: F1 Race Time Prediction
 
-# 🏎️ F1 Predictions 2025 - Machine Learning Model
+FormulaVision is a machine learning project that predicts Formula 1 race outcomes for the 2025 season by leveraging historical data, qualifying performance, team telemetry, and live weather conditions.
 
-Welcome to the **F1 Predictions 2025** repository! This project uses **machine learning, FastF1 API data, and historical F1 race results** to predict race outcomes for the 2025 Formula 1 season.
+## Project Overview
 
-## 🚀 Project Overview
-This repository contains a **Gradient Boosting Machine Learning model** that predicts race results based on past performance, qualifying times, and other structured F1 data. The model leverages:
-- FastF1 API for historical race data
-- 2024 race results
-- 2025 qualifying session results
-- Over the course of the season we will be adding additional data to improve our model as well
-- Feature engineering techniques to improve predictions
+This repository develops predictive models using Gradient Boosting Regressors. The model progresses through consecutive calendar iterations, starting with qualifying-only predictions and evolving to incorporate historical sector averages, weather constraints, team performance indexes, and track-specific layouts.
 
-## 📊 Data Sources
-- **FastF1 API**: Fetches lap times, race results, and telemetry data
-- **2025 Qualifying Data**: Used for prediction
-- **Historical F1 Results**: Processed from FastF1 for training the model
+## Key Features
 
-## 🏁 How It Works
-1. **Data Collection**: The script pulls relevant F1 data using the FastF1 API.
-2. **Preprocessing & Feature Engineering**: Converts lap times, normalizes driver names, and structures race data.
-3. **Model Training**: A **Gradient Boosting Regressor** is trained using 2024 race results.
-4. **Prediction**: The model predicts race times for 2025 and ranks drivers accordingly.
-5. **Evaluation**: Model performance is measured using **Mean Absolute Error (MAE)**.
+- **FastF1 API Integration**: Automated retrieval of historical race logs, telemetry data, and lap times.
+- **Iterative ML Models**: Feature engineering layers added race-by-race, incorporating:
+  - Qualifying performance
+  - Sector times
+  - Driver wet-performance coefficients
+  - Live meteorological telemetry
+  - Season standings and constructor points index
+- **Robust API Integration**: Resilience mechanisms to fall back gracefully on missing OpenWeatherMap API details.
 
-### Dependencies
-- `fastf1`
-- `numpy`
-- `pandas`
-- `scikit-learn`
-- `matplotlib`
+## Repository Structure
 
-## File Structure 
-- For every race the end of the file will be numbered in correlation to the race on the calendar, ex. prediction1 - Australia, prediction2 - China, etc.
+- `prediction1.py` to `prediction8.py`: Successive scripts for race-specific models (e.g., Australia, China, Japan, Bahrain, Saudi Arabia, Miami, Imola, Monaco).
+- `prediction2_nochange.py` & `prediction2_olddrivers.py`: Baseline model variations.
+- `requirements.txt`: Unified Python package dependency declaration.
+- `db/init_db.sql`: Database schema configuration for historical telemetry data storage.
+- `tests/check_db_connection.py`: Postgres connection validation scripts.
 
-## 🔧 Usage
-Run the prediction script:
+## Installation and Setup
+
+### Prerequisites
+
+Python 3.9+ is recommended. 
+
+### Step 1: Clone and Set Up Virtual Environment
+
 ```bash
-python3 prediction1.py
+git clone https://github.com/Tanishq74/FormulaVision.git
+cd FormulaVision
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+pip install psycopg2-binary
 ```
-Expected output:
+
+### Step 2: Configure Environment Variables
+
+Create a `.env` file in the root directory based on the `.env.example` file:
+
+```bash
+cp .env.example .env
 ```
-🏁 Predicted 2025 Australian GP Winner 🏁
-Driver: Charles Leclerc, Predicted Race Time: 82.67s
+
+Add your OpenWeatherMap API key:
+```env
+OPENWEATHER_API_KEY=your_api_key_here
+```
+
+## Running Predictions
+
+To execute a prediction model for a specific race (e.g., Monaco GP model):
+
+```bash
+python prediction8.py
+```
+
+### Sample Output Format
+
+```
+Predicted 2025 Monaco GP Winner
+
+   Driver  PredictedRaceTime (s)
+6     LEC              78.439039
+1     NOR              78.504472
+2     PIA              78.524145
+8     HAM              78.570802
 ...
-🔍 Model Error (MAE): 3.22 seconds
+
+Model Error (MAE): 0.67 seconds
+
+Predicted Podium:
+P1: LEC
+P2: NOR
+P3: PIA
 ```
 
-## 📈 Model Performance
-The Mean Absolute Error (MAE) is used to evaluate how well the model predicts race times. Lower MAE values indicate more accurate predictions.
+## Model Evaluation
 
-## 📌 Future Improvements
-- Incorporate **weather conditions** as a feature
-- Add **pit stop strategies** into the model
-- Explore **deep learning** models for improved accuracy
-- @mar_antaya on Instagram and TikTok will update with the latest predictions before every race of the 2025 F1 season
+The model uses Mean Absolute Error (MAE) as the primary evaluation metric. Gradient Boosting models are tuned with different estimators and learning rates depending on the dataset characteristics of each track.
 
-## 📜 License
+## License
+
 This project is licensed under the MIT License.
-
-
-🏎️ **Start predicting F1 races like a data scientist!** 🚀
-
