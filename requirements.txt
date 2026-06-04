@@ -1,26 +1,23 @@
-# --- Core ---
+# --- F1 Data & Predictions ---
+fastf1>=3.4.0
 pandas
 numpy
-sqlalchemy
-psycopg2-binary
-
-# --- API & Backend ---
-fastapi
-uvicorn
-
-# --- ETL / Data Tools ---
+scikit-learn
+matplotlib
 requests
 python-dotenv
 
-# --- Frontend / Dashboards ---
+# --- Database & Backend ---
+sqlalchemy
+psycopg2-binary
+fastapi
+uvicorn
+
+# --- Frontend & Visualizations ---
 streamlit
 plotly
 
-# --- ML & Visualization ---
-scikit-learn
-matplotlib
-
-# --- Kafka ---
+# --- Messaging ---
 confluent-kafka
 
 # --- Dev Tools ---
